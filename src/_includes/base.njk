@@ -27,8 +27,8 @@
 		<link rel="manifest" href="/assets/site.webmanifest" />
 	</head>
 	<body>
+		{% include "header.njk" %}
 		<main class="content-grid">
-			{% include "header.njk" %}
 			{{ content | safe }}
 		</main>
 	</body>

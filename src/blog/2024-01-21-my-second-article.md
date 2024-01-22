@@ -1,5 +1,5 @@
 ---
-title: My Second Article
+title: Tailwindcss
 author: Matthew Sweet
 date: 2024-01-21
 image: /assets/blog/article-2.webp

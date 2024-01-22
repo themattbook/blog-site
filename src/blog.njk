@@ -3,17 +3,15 @@ title: Blog
 layout: 'base.njk'
 ---
 
-<h1>Recent Articles</h1>
-
-<ul>
-	{%- for post in collections.post | reverse -%}
-	<li>
-		<article>
-			<h3>{{ post.data.title }}</h3>
-			<p>{{ post.data.date | postDate }}</p>
-			<p>{{ post.data.description }}</p>
-			<a href="{{ post.url }}">{{ post.url }}</a>
-		</article>
-	</li>
-	{%- endfor -%}
-</ul>
+<div class="inner-content">
+	<div class="blog-list">
+		<ul>
+			{%- for post in collections.post | reverse -%}
+			<li>
+				{{ post.data.date | postDate }}:
+				<a href="{{ post.url }}">{{ post.data.title }}</a>
+			</li>
+			{%- endfor -%}
+		</ul>
+	</div>
+</div>
