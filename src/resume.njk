@@ -1,0 +1,39 @@
+---
+title: Resume
+layout: 'base.njk'
+---
+
+<section class="grid-cols-2">
+	<div class="headline-container">
+		<h1 class="headline">My Resume</h1>
+	</div>
+	<div class="img-container">
+		<img
+			src="/assets/resume.svg"
+			alt="a man standing in front of a large web browser of code"
+		/>
+	</div>
+</section>
+<section class="content" role="experience">
+	<p>
+		I won&apos;t be cruel and expect you to read this entire thing, but
+		I&apos;m sure someone might eventually. I&apos;ll provide a written copy
+		here in text, but also provide my resume in
+		<a href="/assets/matt_sweet_resume.pdf">.pdf</a> and
+		<a href="/assets/matt_sweet_resume.docx">.docx</a> format for your
+		leisure. Yes, recruiters, that&apos;s for you.
+	</p>
+
+	{% for entry in workHistory %}
+	<div>
+		<h1 class="resume-title">{{ entry.title }}</h1>
+		<div>{{ entry.date }}</div>
+		<div class="resume-description">
+			<p>{{ entry.description }}</p>
+		</div>
+		<div class="resume-technology">
+			<p>Technology used: {{ entry.technologies }}</p>
+		</div>
+	</div>
+	{% endfor %}
+</section>

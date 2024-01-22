@@ -1,0 +1,9 @@
+---
+layout: base.njk
+---
+
+<article>
+	<h1>{{ title }}</h1>
+	<p>{{ author }} on {{ date | postDate }}</p>
+	<p>{{ content | safe }}</p>
+</article>
