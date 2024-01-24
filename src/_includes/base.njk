@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{{ title }}</title>
 		{% block css %}
-		<link rel="stylesheet" href="/style.css" />
+		<link rel="stylesheet" href="/style-light.css" id="light-theme" />
 		{% endblock %}
 		<link
 			rel="apple-touch-icon"
@@ -27,9 +27,93 @@
 		<link rel="manifest" href="/assets/site.webmanifest" />
 	</head>
 	<body>
-		{% include "header.njk" %}
-		<main class="content-grid">
+		<canvas id="starfield"></canvas>
+		<main class="content-grid screen-height">
+			{% include "header.njk" %}
 			{{ content | safe }}
 		</main>
 	</body>
+	<script>
+		const canvas = document.getElementById('starfield');
+		const context = canvas.getContext('2d');
+		const screenW = window.innerWidth;
+		const screenH = window.innerHeight;
+		const numStars = 14;
+		const stars = [];
+
+		const connections = 2; // Number of stars to connect
+		const constellations = 1; // Number of constellations
+
+		canvas.width = screenW;
+		canvas.height = screenH;
+
+		for (let i = 0; i < numStars; i++) {
+			const x = Math.round(Math.random() * screenW);
+			const y = Math.round(Math.random() * screenH);
+			const radius = 1 + Math.random() / 2;
+			const opacity = Math.random();
+			const increment = Math.random() * 0.03;
+
+			stars.push({ x, y, radius, opacity, increment, factor: 1 });
+		}
+
+		// Function to create random constellations
+		function createConstellation() {
+			const starIndices = [];
+			for (let i = 0; i < connections; i++) {
+				const index = Math.floor(Math.random() * numStars);
+				starIndices.push(index);
+			}
+			return starIndices;
+		}
+
+		// Create constellations
+		const constellationsList = [];
+		for (let i = 0; i < constellations; i++) {
+			constellationsList.push(createConstellation());
+		}
+
+		function drawStar(star) {
+			context.save();
+
+			if (star.opacity > 1) {
+				star.factor = -1;
+			} else if (star.opacity <= 0) {
+				star.factor = 1;
+			}
+
+			star.opacity += star.increment * star.factor;
+
+			context.globalAlpha = star.opacity;
+			context.fillStyle = `rgba(255, 255, 255, 1)`;
+			context.shadowBlur = 5;
+			context.shadowColor = '#33eeff';
+			context.beginPath();
+			context.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
+			context.closePath();
+			context.fill();
+
+			// Draw lines between stars based on constellations
+			context.beginPath();
+			const constellation =
+				constellationsList[
+					Math.floor(Math.random() * constellationsList.length)
+				];
+			constellation.forEach((index) => {
+				const otherStar = stars[index];
+				context.moveTo(star.x, star.y);
+				context.lineTo(otherStar.x, otherStar.y);
+			});
+			context.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+			context.stroke();
+
+			context.restore();
+		}
+
+		function animate() {
+			stars.forEach(drawStar);
+		}
+
+		animate();
+	</script>
 </html>
