@@ -11,7 +11,7 @@
 	/* --base-color: #fff; */
 	/* --base-background: #000; */
 	/* --base-background: #2e2e2c; */
-	--base-color: #fff;
+	--base-color: #ffffffe4;
 	--base-background: #2e2e2c;
 	--link-color: #0284c7;
 	--link-hover-color: #67c4f0;
@@ -305,6 +305,56 @@ a:hover {
 	color: var(--base-color);
 	font-weight: 700;
 }
+*/
+
+/* Test CSS */
+canvas {
+	display: block;
+}
+
+#starfield {
+	position: fixed;
+	top: 0;
+	left: 0;
+	/* background: linear-gradient(to bottom, #213642, #989c7e); */
+	/* background: linear-gradient(to bottom, #001226, #001226, #01304b); */
+	background: linear-gradient(to bottom, #000000, #000014, #000b26, #01395f);
+}
+
+.screen-height {
+	min-height: calc(100vh - 48px);
+}
+
+.flex-centered {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.bg {
+	background: linear-gradient(to bottom, #213642, #989c7e);
+}
+
+.bottom-left {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-start;
+	width: 30vw;
+}
+
+.featured {
+	text-transform: uppercase;
+}
+
+.featured h1 {
+	font-size: 6rem;
+}
+
+.subtext {
+	font-size: 0.9rem;
+	font-weight: 300;
+	text-transform: initial;
+}
 
 @media (max-width: 1200px) {
 	.content-grid,
@@ -327,49 +377,32 @@ a:hover {
 }
 
 @media (max-width: 720px) {
+	body {
+		font-size: 14px;
+	}
 	.content-grid,
 	.full-width {
 		display: grid;
 		grid-template-columns: [full-width-start] 10px [content-start] 10px [inner-content-start] 1fr [inner-content-end] 10px [content-end] 10px [full-width-end];
 	}
-} */
-
-/* Test CSS */
-canvas {
-	display: block;
-}
-
-#starfield {
-	position: fixed;
-	top: 0;
-	left: 0;
-	/* background: linear-gradient(to bottom, #213642, #989c7e); */
-	background: linear-gradient(to bottom, #001226, #001226, #01304b);
-}
-
-.screen-height {
-	min-height: calc(100vh - 48px);
-}
-
-.flex-centered {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.bg {
-	background: linear-gradient(to bottom, #213642, #989c7e);
-}
-
-.featured {
-	text-transform: uppercase;
-	text-align: center;
-}
-
-.featured p {
-	font-weight: 400;
-}
-
-.featured h1 {
-	font-size: 6rem;
+	.nav-left {
+		display: none;
+	}
+	.nav-items {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.bottom-left {
+		align-items: center;
+		justify-content: center;
+		width: 95vw;
+		text-align: center;
+	}
+	.featured h1 {
+		font-size: 3rem;
+	}
+	.subtext {
+		font-weight: 400;
+		font-size: 0.8rem;
+	}
 }
